@@ -32,6 +32,7 @@
                                 <th class="py-4 px-6">Code</th>
                                 <th class="py-4 px-6">Course Name</th>
                                 <th class="py-4 px-6">Semester</th>
+                                <th class="py-4 px-6">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
@@ -52,6 +53,17 @@
                                         <span class="text-slate-600 bg-slate-100 px-3 py-1 rounded-lg text-sm">
                                             <%= c.getSemester() %>
                                         </span>
+                                    </td>
+                                    <td class="py-4 px-6 flex gap-2">
+                                        <a href="${pageContext.request.contextPath}/course/update?id=<%= c.getId() %>"
+                                           class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                                            Edit
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/course/delete?id=<%= c.getId() %>"
+                                           onclick="return confirm('Delete this course?')"
+                                           class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                                            Delete
+                                        </a>
                                     </td>
                                 </tr>
                             <%
