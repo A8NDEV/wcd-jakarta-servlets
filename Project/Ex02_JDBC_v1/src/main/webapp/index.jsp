@@ -15,13 +15,26 @@
     </head>
     <body class="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto">
-            <div class="mb-10 flex items-center justify-between">
+            <div class="mb-6 flex items-center justify-between">
                 <h1 class="text-4xl font-extrabold text-slate-900 sm:text-5xl tracking-tight">Course Management</h1>
                 <a href="${pageContext.request.contextPath}/course/create"
                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors">
                     + Add Course
                 </a>
             </div>
+            <form action="${pageContext.request.contextPath}/course" method="get" class="mb-6 flex gap-2">
+                <input type="text" name="keyword" value="${keyword}"
+                       placeholder="Search by code..."
+                       class="flex-1 border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                <button type="submit"
+                        class="bg-slate-800 hover:bg-slate-900 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                    Search
+                </button>
+                <a href="${pageContext.request.contextPath}/course"
+                   class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                    Reset
+                </a>
+            </form>
 
             <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
                 <div class="overflow-x-auto">
