@@ -15,8 +15,12 @@
     </head>
     <body class="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto">
-            <div class="mb-10 text-center">
-                <h1 class="text-4xl font-extrabold text-slate-900 sm:text-5xl tracking-tight mb-4">Course Management</h1>
+            <div class="mb-10 flex items-center justify-between">
+                <h1 class="text-4xl font-extrabold text-slate-900 sm:text-5xl tracking-tight">Course Management</h1>
+                <a href="${pageContext.request.contextPath}/course/create"
+                   class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                    + Add Course
+                </a>
             </div>
 
             <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">

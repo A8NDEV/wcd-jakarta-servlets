@@ -43,7 +43,22 @@ public class CourseDal {
         return courses;
     }
     //2. CRUD
-    // 2.1 create() methodv
+    // 2.1 create() method
+    public boolean create(Course course) {
+        try {
+            String sql = "INSERT INTO courses (code, name, semester) VALUES (?, ?, ?)";
+            Connection conn = DBConnect.getConnection();
+            java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, course.getCode());
+            ps.setString(2, course.getName());
+            ps.setString(3, course.getSemester());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("DEBUG: LOI CREATE: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
     // 2.2 update() method
     // 2.3 delete() method
 
