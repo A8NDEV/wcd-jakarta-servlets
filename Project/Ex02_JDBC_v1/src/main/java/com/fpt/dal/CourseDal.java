@@ -117,4 +117,31 @@ public class CourseDal {
         }
         return course;
     }
+
+    // 3.2 searchByCode() method
+    public List<Course> searchByCode(String keyword) {
+        List<Course> courses = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM courses WHERE code LIKE ?";
+            Connection conn = DBConnect.getConnection();
+            java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + keyword + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt(1));
+                course.setCode(rs.getString(2));
+                course.setName(rs.getString(3));
+                course.setSemester(rs.getString(4));
+                courses.add(course);
+            }
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("DEBUG: LOI SEARCH: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return courses;
+    }
 }
