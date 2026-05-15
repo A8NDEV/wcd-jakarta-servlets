@@ -13,9 +13,14 @@ public class CourseServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // 1. Lấy dữ liệu từ database thông qua DAL
         CourseDal dal = new CourseDal();
-        request.setAttribute("list", dal.findAll());
+        String keyword = request.getParameter("keyword");
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            request.setAttribute("list", dal.searchByCode(keyword.trim()));
+            request.setAttribute("keyword", keyword.trim());
+        } else {
+            request.setAttribute("list", dal.findAll());
+        }
         
         // 2. Chuyển tiếp (forward) sang trang JSP để hiển thị
         // Lưu ý: Không dùng response.getWriter() khi dùng forward
