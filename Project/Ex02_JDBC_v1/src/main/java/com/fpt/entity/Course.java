@@ -12,9 +12,9 @@ public class Course {
     private int id;
     private String code;
     private String name;
-    private int semester;
+    private String semester;
 
-    public Course(int id, String code, String name, int semester) {
+    public Course(int id, String code, String name, String semester) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -48,11 +48,11 @@ public class Course {
         this.name = name;
     }
 
-    public int getSemester() {
+    public String getSemester() {
         return semester;
     }
 
-    public void setSemester(int semester) {
+    public void setSemester(String semester) {
         this.semester = semester;
     }
 
