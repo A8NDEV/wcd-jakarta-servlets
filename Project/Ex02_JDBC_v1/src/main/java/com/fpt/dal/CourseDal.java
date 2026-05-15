@@ -79,6 +79,19 @@ public class CourseDal {
         }
     }
     // 2.3 delete() method
+    public boolean delete(int id) {
+        try {
+            String sql = "DELETE FROM courses WHERE id=?";
+            Connection conn = DBConnect.getConnection();
+            java.sql.PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("DEBUG: LOI DELETE: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     // 3. Utils
     // 3.1 findById() method
