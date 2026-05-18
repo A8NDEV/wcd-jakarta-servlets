@@ -16,7 +16,7 @@
             </div>
 
             <div class="bg-white shadow-xl rounded-2xl p-8 border border-slate-200">
-                <form action="${pageContext.request.contextPath}/course/create" method="post" class="space-y-5">
+                <form action="${pageContext.request.contextPath}/course?action=create" method="post" class="space-y-5">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Code</label>
                         <input type="text" name="code" required

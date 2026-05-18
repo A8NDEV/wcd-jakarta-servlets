@@ -21,7 +21,7 @@
             %>
 
             <div class="bg-white shadow-xl rounded-2xl p-8 border border-slate-200">
-                <form action="${pageContext.request.contextPath}/course/update" method="post" class="space-y-5">
+                <form action="${pageContext.request.contextPath}/course?action=update" method="post" class="space-y-5">
                     <input type="hidden" name="id" value="<%= course.getId() %>"/>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Code</label>

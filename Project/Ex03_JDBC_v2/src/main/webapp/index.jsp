@@ -1,6 +1,12 @@
 <%@page import="java.util.List"%>
 <%@page import="com.fpt.entity.Course"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (request.getAttribute("list") == null && request.getParameter("keyword") == null) {
+        response.sendRedirect(request.getContextPath() + "/course");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,7 +23,7 @@
         <div class="max-w-5xl mx-auto">
             <div class="mb-6 flex items-center justify-between">
                 <h1 class="text-4xl font-extrabold text-slate-900 sm:text-5xl tracking-tight">Course Management</h1>
-                <a href="${pageContext.request.contextPath}/course/create"
+                <a href="${pageContext.request.contextPath}/course?action=create"
                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors">
                     + Add Course
                 </a>
@@ -68,11 +74,11 @@
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 flex gap-2">
-                                        <a href="${pageContext.request.contextPath}/course/update?id=<%= c.getId() %>"
+                                        <a href="${pageContext.request.contextPath}/course?action=update&id=<%= c.getId() %>"
                                            class="bg-yellow-400 hover:bg-yellow-500 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors">
                                             Edit
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/course/delete?id=<%= c.getId() %>"
+                                        <a href="${pageContext.request.contextPath}/course?action=delete&id=<%= c.getId() %>"
                                            onclick="return confirm('Delete this course?')"
                                            class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors">
                                             Delete
