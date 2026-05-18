@@ -3,7 +3,6 @@ package com.fpt.controller;
 import com.fpt.dal.CourseDal;
 import com.fpt.entity.Course;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-@WebServlet(name = "CourseServlet", urlPatterns = { "/controller" })
+@WebServlet(name = "CourseServlet", urlPatterns = { "/course", "/controller" })
 public class CourseServlet extends HttpServlet {
 
     /**
@@ -29,32 +28,55 @@ public class CourseServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            // Parameter lists
-            String action = request.getParameter("action");
-            Course course;
-            Integer id;
-            String code, name, sem;
-            CourseDal dal = new CourseDal();
+        String action = request.getParameter("action");
+        CourseDal dal = new CourseDal();
 
-            // 2. CRUD
-            // 2.1. View
-            if (action == null) {
-
+        if (action == null || action.trim().isEmpty() || action.equals("list")) {
+            String keyword = request.getParameter("keyword");
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                request.setAttribute("list", dal.searchByCode(keyword.trim()));
+                request.setAttribute("keyword", keyword.trim());
             } else {
-                switch (action) {
-                    case "create" -> {
-
+                request.setAttribute("list", dal.findAll());
+            }
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else {
+            switch (action) {
+                case "create" -> {
+                    if ("GET".equalsIgnoreCase(request.getMethod())) {
+                        request.getRequestDispatcher("/course-create.jsp").forward(request, response);
+                    } else if ("POST".equalsIgnoreCase(request.getMethod())) {
+                        String code = request.getParameter("code");
+                        String name = request.getParameter("name");
+                        String semester = request.getParameter("semester");
+                        Course course = new Course(0, code, name, semester);
+                        dal.create(course);
+                        response.sendRedirect(request.getContextPath() + "/course");
                     }
-                    case "update" -> {
-
+                }
+                case "update" -> {
+                    if ("GET".equalsIgnoreCase(request.getMethod())) {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        Course course = dal.findById(id);
+                        request.setAttribute("course", course);
+                        request.getRequestDispatcher("/course-update.jsp").forward(request, response);
+                    } else if ("POST".equalsIgnoreCase(request.getMethod())) {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        String code = request.getParameter("code");
+                        String name = request.getParameter("name");
+                        String semester = request.getParameter("semester");
+                        Course course = new Course(id, code, name, semester);
+                        dal.update(course);
+                        response.sendRedirect(request.getContextPath() + "/course");
                     }
-                    case "delete" -> {
-
-                    }
-                    default -> {
-                    
-                    }
+                }
+                case "delete" -> {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    dal.delete(id);
+                    response.sendRedirect(request.getContextPath() + "/course");
+                }
+                default -> {
+                    response.sendRedirect(request.getContextPath() + "/course");
                 }
             }
         }
