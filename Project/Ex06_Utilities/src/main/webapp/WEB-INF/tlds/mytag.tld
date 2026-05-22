@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+  <tlib-version>1.0</tlib-version>
+  <short-name>mytag</short-name>
+  <uri>/WEB-INF/tlds/mytag</uri>
+  <!--1. Hàm doUpper từ MyTLD  -->
+  <function>
+    <name>chuhoa</name>
+    <function-class>com.fpt.tld.MyTLD</function-class>
+    <function-signature>
+      <!-- 
+        1. Trừ primarity datatype, các datatype phải khai báo gói
+        2. phương thức chỉ khai báo datatype mà không có tên parameter
+      -->
+      java.lang.String doUpper(java.lang.String)
+    </function-signature>
+  </function>
+</taglib>
