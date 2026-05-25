@@ -9,4 +9,8 @@
         <error-code>404</error-code>
         <location>/rs04_404.jsp</location>
     </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/rs05_500.jsp</location>
+    </error-page>
 </web-app>
