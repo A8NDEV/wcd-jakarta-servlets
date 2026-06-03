@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+   version="6.0">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+    <!-- R2.1 Security Constraint: Protect Admin Area -->
+    <security-constraint>
+        <display-name>Admin Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin Resources</web-resource-name>
+            <url-pattern>/create.jsp</url-pattern>
+            <url-pattern>/PhoneServlet</url-pattern>
+            <url-pattern>/phone/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- R2.1 Login Configuration: FORM Authentication -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/login-error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <!-- R2.1 Security Role -->
+    <security-role>
+        <description>Administrator Role</description>
+        <role-name>admin</role-name>
+    </security-role>
+</web-app>
